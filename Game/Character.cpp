@@ -1,5 +1,15 @@
 #include "Character.h"
 
+Character::Character(Point position, char sym, int hp, int damage, int maxHp) :
+	GameObject(position, sym),
+	hp(hp),
+	damage(damage),
+	maxHp(maxHp) {}
+
+void Character::Move()
+{
+}
+
 int Character::GetHp() {
 	return hp;
 }
@@ -13,22 +23,17 @@ int Character::GetMaxHp()
 	return maxHp;
 }
 
-char Character::GetSym()
+void Character::SetHp(int hp)
 {
-	return sym;
+	this->hp = hp;
 }
 
-void Character::SetHp(int hpNew)
+void Character::SetDamage(int damage)
 {
-	hp = hpNew;
+	this->damage = damage;
 }
 
-void Character::SetDamage(int damageNew)
+void Character::SetMaxHp(int maxHp)
 {
-	damage = damageNew;
-}
-
-void Character::SetMaxHp(int maxHpNew)
-{
-	maxHp = maxHpNew;
+	this->maxHp = maxHp;
 }

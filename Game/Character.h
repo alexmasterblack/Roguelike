@@ -4,24 +4,24 @@
 class Character : public GameObject
 {
 public:
+	Character(Point, char, int, int, int);
+
+	void Move();
+
 	int GetHp();
 
 	int GetDamage();
 
 	int GetMaxHp();
 
-	char GetSym();
-
 	void SetHp(int);
 
 	void SetDamage(int);
 
 	void SetMaxHp(int);
-	//void SetSym();
 
 private:
 	int hp;
 	int damage;
 	int maxHp;
-	char sym;
 };
