@@ -1,4 +1,5 @@
 #pragma once
+#include "curses.h"
 #include "Point.h"
 
 class Wall;
@@ -11,6 +12,7 @@ class Projectile;
 
 class GameObject
 {
+public:
 	Point GetPos();
 
 	char GetSym();
@@ -35,7 +37,6 @@ class GameObject
 
 	virtual void Collide(Projectile&) = 0;
 
-protected:
 	GameObject(Point, char);
 
 private:

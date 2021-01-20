@@ -95,5 +95,11 @@
     <ClInclude Include="GameProcess.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="nlohmann\json.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.json" />
   </ItemGroup>
 </Project>

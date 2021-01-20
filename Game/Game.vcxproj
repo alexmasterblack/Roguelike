@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,12 +163,16 @@
     <ClInclude Include="GameProcess.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="nlohmann\json.hpp" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Princess.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ShootCharacter.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Zombie.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

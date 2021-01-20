@@ -1,7 +1,7 @@
 #pragma once
 #include "ShootCharacter.h"
 
-class Dragon : ShootCharacter
+class Dragon : public ShootCharacter
 {
 public:
 	Dragon(Point, char, int, int, int);

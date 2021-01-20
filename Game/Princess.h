@@ -3,6 +3,7 @@
 
 class Princess : public GameObject
 {
+public:
 	Princess(Point, char);
 
 	virtual void Collide(GameObject&) override;

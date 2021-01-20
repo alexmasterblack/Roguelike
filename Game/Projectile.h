@@ -1,7 +1,7 @@
 #pragma once
 #include "ShootCharacter.h"
 
-class Projectile : ShootCharacter
+class Projectile : public ShootCharacter
 {
 public:
 	Projectile(Point, char, int, int, int);

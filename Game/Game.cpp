@@ -1,4 +1,5 @@
 ﻿#include "curses.h"
+#include "Map.h"
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #include <string>
@@ -83,6 +84,16 @@ int main()
 {
     HWND consoleWindow = GetConsoleWindow();
     SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
-    PlayGame();
+    //PlayGame();
+    initscr();
+    noecho(); //выключение отображения вводимых символов
+    cbreak();
+    curs_set(0);
+    Map mapGame;
+    mapGame.ReadMap();
+    mapGame.LoadMap();
+
+    getch();
+    endwin();
     return 0;
 }
