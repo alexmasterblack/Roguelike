@@ -20,6 +20,7 @@ public:
 	void LoadMap();
 
 private:
+	friend class GameProcess;
 	std::map<Point, std::shared_ptr<GameObject>> gameObjects;
 	json setting;
 };

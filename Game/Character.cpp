@@ -6,10 +6,6 @@ Character::Character(Point position, char sym, int hp, int damage, int maxHp) :
 	damage(damage),
 	maxHp(maxHp) {}
 
-void Character::Move()
-{
-}
-
 int Character::GetHp() {
 	return hp;
 }

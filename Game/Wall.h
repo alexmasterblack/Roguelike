@@ -6,20 +6,22 @@ class Wall : public GameObject
 public:
 	Wall(Point, char);
 
-	virtual void Collide(GameObject&) override;
+	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
-	virtual void Collide(Wall&) override;
+	void Collide(GameObject*) override;
 
-	virtual void Collide(Knight&) override;
+	void Collide(Wall*) override;
 
-	virtual void Collide(Zombie&) override;
+	void Collide(Knight*) override;
 
-	virtual void Collide(Dragon&) override;
+	void Collide(Zombie*) override;
 
-	virtual void Collide(Princess&) override;
+	void Collide(Dragon*) override;
 
-	virtual void Collide(AidKit&) override;
+	void Collide(Princess*) override;
 
-	virtual void Collide(Projectile&) override;
+	void Collide(AidKit*) override;
+
+	void Collide(Projectile*) override;
 };
 

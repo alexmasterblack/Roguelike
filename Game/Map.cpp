@@ -78,6 +78,7 @@ void Map::ReadMap()
 
 void Map::LoadMap()
 {
+	clear();
 	for (int row = 0; row < 18; row++) {
 		for (int col = 0; col < 48; col++) {
 			auto pixel = gameObjects.find(Point(col, row));
@@ -86,5 +87,14 @@ void Map::LoadMap()
 			}
 		}
 	}
+	// dynamic_pointer_cast to go down/across class hierarchy
+	int knightHp = 0;
+	for (auto &object : gameObjects) {
+		auto knight = std::dynamic_pointer_cast<Knight>(object.second);
+		if (knight) {
+			knightHp = knight->GetHp();
+		}
+	}
+	mvprintw(1, 50, ("Hp: " + std::to_string(knightHp)).c_str());
 	refresh();
 }
