@@ -8,35 +8,35 @@ Point Dragon::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 	return GetPos();
 }
 
-void Dragon::Collide(GameObject* object)
+void Dragon::Collide(GameObject* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 {
-	object->Collide(this);
+	object->Collide(this, gameObjects);
 }
 
-void Dragon::Collide(Wall*)
-{
-}
-
-void Dragon::Collide(Knight*)
+void Dragon::Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Dragon::Collide(Zombie*)
+void Dragon::Collide(Knight*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Dragon::Collide(Dragon*)
+void Dragon::Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Dragon::Collide(Princess*)
+void Dragon::Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Dragon::Collide(AidKit*)
+void Dragon::Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Dragon::Collide(Projectile*)
+void Dragon::Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&)
+{
+}
+
+void Dragon::Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }

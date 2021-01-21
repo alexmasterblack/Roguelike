@@ -64,7 +64,8 @@ void Map::ReadMap()
 			}
 			case '+': {
 				std::string sym = setting["AidKit"]["sym"];
-				gameObjects[position] = std::make_shared<AidKit>(position, sym[0]);
+				gameObjects[position] = std::make_shared<AidKit>(position, sym[0],
+					setting["AidKit"]["hpUp"]);
 				break;
 			}
 			default: {
@@ -93,6 +94,7 @@ void Map::LoadMap()
 		auto knight = std::dynamic_pointer_cast<Knight>(object.second);
 		if (knight) {
 			knightHp = knight->GetHp();
+			break;
 		}
 	}
 	mvprintw(1, 50, ("Hp: " + std::to_string(knightHp)).c_str());

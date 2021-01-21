@@ -8,35 +8,35 @@ Point Projectile::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects
 	return GetPos();
 }
 
-void Projectile::Collide(GameObject* object)
+void Projectile::Collide(GameObject* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 {
-	object->Collide(this);
+	object->Collide(this, gameObjects);
 }
 
-void Projectile::Collide(Wall*)
-{
-}
-
-void Projectile::Collide(Knight*)
+void Projectile::Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Projectile::Collide(Zombie*)
+void Projectile::Collide(Knight*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Projectile::Collide(Dragon*)
+void Projectile::Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Projectile::Collide(Princess*)
+void Projectile::Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Projectile::Collide(AidKit*)
+void Projectile::Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }
 
-void Projectile::Collide(Projectile*)
+void Projectile::Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&)
+{
+}
+
+void Projectile::Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&)
 {
 }

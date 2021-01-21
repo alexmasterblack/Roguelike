@@ -47,6 +47,7 @@ void GameProcess::StartGame()
             if (highlight == 1) {
                 exit(1);
             };
+            break;
         default:
             break;
         }
@@ -57,22 +58,55 @@ void GameProcess::StartGame()
         }
     }
     while (true) {
-        gameMap.LoadMap();
-        //Game();
-        ///endwin();
-        //break;
+        //gameMap.LoadMap();
+        Game();
+        endwin();
+        break;
     }
 }
 
 void GameProcess::Game()
 {
-    std::chrono::milliseconds interval(150);
+    std::chrono::milliseconds interval(400);
     nodelay(stdscr, true);
+    gameMap.LoadMap();
     while (true) {
-        for (auto& object : gameMap.gameObjects) {
-            Point pos = object.second->Move(gameMap.gameObjects);
+        for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
+            Point position = object->second->Move(gameMap.gameObjects);
+            auto oldObject = object;
+            auto knight = std::dynamic_pointer_cast<Knight>(oldObject->second);
+            if (knight) {
+                if (knight->GetHp() == 0) {
+                    ResultGame(false);
+                    clear();
+                    refresh();
+                    return;
+                }
+            }
+            if (position != oldObject->first) {
+                object++;
+                gameMap.gameObjects.erase(oldObject->first);
+            }
+            else {
+                object++;
+            }
         }
         gameMap.LoadMap();
         std::this_thread::sleep_for(interval);
+    }
+}
+
+void GameProcess::ResultGame(bool result)
+{
+    if (!result) {
+        clear();
+        mvprintw(3, 18, "You are dead");
+        refresh();
+    }
+    while (true) {
+        int command = getch();
+        if (command == 'Q' || command == 'q') {
+            break;
+        }
     }
 }
