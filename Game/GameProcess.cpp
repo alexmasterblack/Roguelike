@@ -58,7 +58,6 @@ void GameProcess::StartGame()
         }
     }
     while (true) {
-        //gameMap.LoadMap();
         Game();
         endwin();
         break;
@@ -67,10 +66,16 @@ void GameProcess::StartGame()
 
 void GameProcess::Game()
 {
-    std::chrono::milliseconds interval(400);
     nodelay(stdscr, true);
-    gameMap.LoadMap();
     while (true) {
+        for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
+            if (object->second->GetHp() == 0) {
+                object = gameMap.gameObjects.erase(object);
+            }
+            else {
+                object++;
+            }
+        }
         for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
             Point position = object->second->Move(gameMap.gameObjects);
             auto oldObject = object;
@@ -78,6 +83,12 @@ void GameProcess::Game()
             if (knight) {
                 if (knight->GetHp() == 0) {
                     ResultGame(false);
+                    clear();
+                    refresh();
+                    return;
+                }
+                if (knight->GetEndGame()) {
+                    ResultGame(true);
                     clear();
                     refresh();
                     return;
@@ -92,16 +103,19 @@ void GameProcess::Game()
             }
         }
         gameMap.LoadMap();
-        std::this_thread::sleep_for(interval);
+        std::this_thread::sleep_for(std::chrono::milliseconds(400));
     }
 }
 
 void GameProcess::ResultGame(bool result)
 {
+    clear();
+    refresh();
     if (!result) {
-        clear();
         mvprintw(3, 18, "You are dead");
-        refresh();
+    }
+    else {
+        mvprintw(3, 18, "You are win");
     }
     while (true) {
         int command = getch();

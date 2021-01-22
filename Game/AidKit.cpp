@@ -1,48 +1,34 @@
 #include "AidKit.h"
 
-AidKit::AidKit(Point position, char sym, int hpUp) :
-	GameObject(position, sym), hpUp(hpUp) {}
-
-int AidKit::GetHpUp()
-{
-	return hpUp;
-}
+AidKit::AidKit(Point position, char sym, int hp) :
+	GameObject(position, sym, hp) {}
 
 Point AidKit::Move(std::map<Point, std::shared_ptr<GameObject>>&)
 {
 	return GetPos();
 }
 
-void AidKit::Collide(GameObject* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
+void AidKit::Collide(GameObject* object)
 {
-	object->Collide(this, gameObjects);
+	object->Collide(this);
 }
 
-void AidKit::Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&)
+void AidKit::Collide(Wall*) {}
+
+void AidKit::Collide(Knight* object)
 {
+	object->Collide(this);
 }
 
-void AidKit::Collide(Knight* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
-{
-	object->Collide(this, gameObjects);
-}
+void AidKit::Collide(Zombie*) {}
 
-void AidKit::Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void AidKit::Collide(Dragon*) {}
 
-void AidKit::Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void AidKit::Collide(Princess*) {}
 
-void AidKit::Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void AidKit::Collide(AidKit*) {}
 
-void AidKit::Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&)
+void AidKit::Collide(Projectile* object)
 {
-}
-
-void AidKit::Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
+	SetHp(0);
 }

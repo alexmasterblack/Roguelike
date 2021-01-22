@@ -2,8 +2,6 @@
 
 class Point {
 public:
-	Point() = default;
-
 	Point(int x, int y) :
 		x(x),
 		y(y) {}

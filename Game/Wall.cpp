@@ -1,42 +1,30 @@
 #include "Wall.h"
 
-Wall::Wall(Point position, char sym) :
-	GameObject(position, sym) {}
+Wall::Wall(Point position, char sym, int hp) :
+	GameObject(position, sym, hp) {}
 
 Point Wall::Move(std::map<Point, std::shared_ptr<GameObject>>&)
 {
 	return GetPos();
 }
 
-void Wall::Collide(GameObject* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
+void Wall::Collide(GameObject* object)
 {
-	object->Collide(this, gameObjects);
+	object->Collide(this);
 }
 
-void Wall::Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Wall::Collide(Wall*) {}
 
-void Wall::Collide(Knight*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Wall::Collide(Knight*) {}
 
-void Wall::Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Wall::Collide(Zombie*) {}
 
-void Wall::Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Wall::Collide(Dragon*) {}
 
-void Wall::Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Wall::Collide(Princess*) {}
 
-void Wall::Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Wall::Collide(AidKit*) {}
 
-void Wall::Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
+void Wall::Collide(Projectile* object) {
+	object->Collide(this);
 }

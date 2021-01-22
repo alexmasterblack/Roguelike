@@ -44,28 +44,21 @@ void Map::ReadMap()
 				break;
 			}
 			case 'P': {
-				std::string sym = setting["Projectile"]["sym"];
-				gameObjects[position] = std::make_shared<Projectile>(position,
-					sym[0],
-					setting["Projectile"]["hp"],
-					setting["Projectile"]["damage"],
-					setting["Projectile"]["maxHp"]);
-				break;
-			}
-			case '*': {
 				std::string sym = setting["Princess"]["sym"];
-				gameObjects[position] = std::make_shared<Princess>(position, sym[0]);
+				gameObjects[position] = std::make_shared<Princess>(position, sym[0],
+					setting["Princess"]["hp"]);
 				break;
 			}
 			case '#': {
 				std::string sym = setting["Wall"]["sym"];
-				gameObjects[position] = std::make_shared<Wall>(position, sym[0]);
+				gameObjects[position] = std::make_shared<Wall>(position, sym[0],
+					setting["Wall"]["hp"]);
 				break;
 			}
 			case '+': {
 				std::string sym = setting["AidKit"]["sym"];
 				gameObjects[position] = std::make_shared<AidKit>(position, sym[0],
-					setting["AidKit"]["hpUp"]);
+					setting["AidKit"]["hp"]);
 				break;
 			}
 			default: {
@@ -97,6 +90,6 @@ void Map::LoadMap()
 			break;
 		}
 	}
-	mvprintw(1, 50, ("Hp: " + std::to_string(knightHp)).c_str());
+	mvprintw(1, 50, ("Health: " + std::to_string(knightHp)).c_str());
 	refresh();
 }

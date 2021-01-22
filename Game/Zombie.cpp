@@ -36,42 +36,32 @@ Point Zombie::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
         SetPos(positionNew);
     }
     else {
-        Collide(object->second.get(), gameObjects);
+        Collide(object->second.get());
     }
     return GetPos();
 }
 
-void Zombie::Collide(GameObject* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
+void Zombie::Collide(GameObject* object)
 {
-	object->Collide(this, gameObjects);
+	object->Collide(this);
 }
 
-void Zombie::Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&)
+void Zombie::Collide(Wall*) {}
+
+void Zombie::Collide(Knight* object)
 {
+    object->SetHp(std::max(0, object->GetHp() - GetDamage()));
 }
 
-void Zombie::Collide(Knight* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
-{
-	object->SetHp(std::max(0, object->GetHp() - GetDamage()));
-    //gameObjects.erase(this->GetPos());
-}
+void Zombie::Collide(Zombie*) {}
 
-void Zombie::Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Zombie::Collide(Dragon*) {}
 
-void Zombie::Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Zombie::Collide(Princess*) {}
 
-void Zombie::Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
+void Zombie::Collide(AidKit*) {}
 
-void Zombie::Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
-
-void Zombie::Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
+void Zombie::Collide(Projectile* object) {
+    SetHp(std::max(0, GetHp() - object->GetDamage()));
+    object->SetHp(0);
 }

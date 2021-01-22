@@ -11,24 +11,27 @@
 class Projectile : public ShootCharacter
 {
 public:
-	Projectile(Point, char, int, int, int);
+
+	Projectile(Point, char, int, int, int, int);
 
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
-	void Collide(GameObject*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Shoot(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
-	void Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(GameObject*) override;
 
-	void Collide(Knight*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(Wall*) override;
 
-	void Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(Knight*) override;
 
-	void Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(Zombie*) override;
 
-	void Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(Dragon*) override;
 
-	void Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(Princess*) override;
 
-	void Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&) override;
+	void Collide(AidKit*) override;
+
+	void Collide(Projectile*) override;
 };
 

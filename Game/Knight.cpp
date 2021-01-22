@@ -3,6 +3,16 @@
 Knight::Knight(Point position, char sym, int hp, int damage, int maxHp) :
 	ShootCharacter(position, sym, hp, damage, maxHp) {}
 
+bool Knight::GetEndGame()
+{
+    return endGame;
+}
+
+void Knight::SetEndGame(bool endGame)
+{
+    this->endGame = endGame;
+}
+
 Point Knight::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 {
     int x = 0, y = 0;
@@ -10,19 +20,27 @@ Point Knight::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
     switch (command)
     {
     case KEY_UP: {
-        x--;
-        break;
-    }
-    case KEY_DOWN: {
-        x++;
-        break;
-    }
-    case KEY_LEFT: {
+        SetDirection(0);
         y--;
         break;
     }
-    case KEY_RIGHT: {
+    case KEY_DOWN: {
+        SetDirection(1);
         y++;
+        break;
+    }
+    case KEY_LEFT: {
+        SetDirection(2);
+        x--;
+        break;
+    }
+    case KEY_RIGHT: {
+        SetDirection(3);
+        x++;
+        break;
+    }
+    case 10: {
+        Shoot(gameObjects);
         break;
     }
     default:
@@ -32,7 +50,7 @@ Point Knight::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
     while (getch() > 0) {}
 
     Point position = GetPos();
-    Point positionNew(position.x + y, position.y + x);
+    Point positionNew(position.x + x, position.y + y);
 
     auto object = gameObjects.find(positionNew);
     if (object == gameObjects.end()) {
@@ -40,43 +58,71 @@ Point Knight::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
         SetPos(positionNew);
     }
     else {
-        Collide(object->second.get(), gameObjects);
+        Collide(object->second.get());
     }
     return GetPos();
 }
 
-void Knight::Collide(GameObject* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
+void Knight::Shoot(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 {
-    object->Collide(this, gameObjects);
+    int x = 0, y = 0;
+    switch (GetDirection())
+    {
+    case 0: {
+        y--;
+        break;
+    }
+    case 1: {
+        y++;
+        break;
+    }
+    case 2: {
+        x--;
+        break;
+    }
+    case 3: {
+        x++;
+        break;
+    }
+    default:
+        break;
+    }
+
+    Point positionNew(GetPos().x + x, GetPos().y + y);
+    auto it = gameObjects.find(positionNew);
+    if (it == gameObjects.end()) {
+        gameObjects[positionNew] = std::make_shared<Projectile>(positionNew, '*', 1, GetDamage(), 1, GetDirection());
+    }
 }
 
-void Knight::Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&)
+void Knight::Collide(GameObject* object)
 {
+    object->Collide(this);
 }
 
-void Knight::Collide(Knight*, std::map<Point, std::shared_ptr<GameObject>>&)
+void Knight::Collide(Wall*) {}
+
+void Knight::Collide(Knight*) {}
+
+void Knight::Collide(Zombie* object) {}
+
+void Knight::Collide(Dragon* object) {}
+
+void Knight::Collide(Princess* gameObjects)
 {
+    SetEndGame(true);
 }
 
-void Knight::Collide(Zombie* object, std::map<Point, std::shared_ptr<GameObject>>&)
+void Knight::Collide(AidKit* object)
 {
-
+    if (GetHp() != GetMaxHp()) {
+        SetHp(std::min(GetMaxHp(), GetHp() + object->GetHp()));
+        object->SetHp(0);
+    }
 }
 
-void Knight::Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&)
+void Knight::Collide(Projectile* object)
 {
-}
-
-void Knight::Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
-}
-
-void Knight::Collide(AidKit* object, std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
-{
-    SetHp(std::min(GetMaxHp(), GetHp() + object->GetHpUp()));
-    gameObjects.erase(object->GetPos());
-}
-
-void Knight::Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&)
-{
+    SetHp(std::max(0, GetHp() - object->GetDamage()));
+    object->SetHp(0);
 }

@@ -1,14 +1,9 @@
 #include "Character.h"
 
 Character::Character(Point position, char sym, int hp, int damage, int maxHp) :
-	GameObject(position, sym),
-	hp(hp),
+	GameObject(position, sym, hp),
 	damage(damage),
 	maxHp(maxHp) {}
-
-int Character::GetHp() {
-	return hp;
-}
 
 int Character::GetDamage() {
 	return damage;
@@ -17,11 +12,6 @@ int Character::GetDamage() {
 int Character::GetMaxHp()
 {
 	return maxHp;
-}
-
-void Character::SetHp(int hp)
-{
-	this->hp = hp;
 }
 
 void Character::SetDamage(int damage)

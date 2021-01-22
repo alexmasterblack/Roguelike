@@ -2,35 +2,31 @@
   "Knight": {
     "sym": "K",
     "hp": 10,
-    "damage": 2,
+    "damage": 3,
     "maxHp": 10
   },
   "Zombie": {
     "sym": "Z",
-    "hp": 6,
-    "damage": 1,
-    "maxHp": 6
+    "hp": 5,
+    "damage": 2,
+    "maxHp": 5
   },
   "Dragon": {
     "sym": "D",
     "hp": 20,
-    "damage": 5,
+    "damage": 4,
     "maxHp": 20
   },
-  "Projectile": {
-    "sym": "P",
-    "hp": 10,
-    "damage": 2,
-    "maxHp": 10
-  },
   "Princess": {
-    "sym": "*"
+    "sym": "P",
+    "hp": 1
   },
   "Wall": {
-    "sym": "#"
+    "sym": "#",
+    "hp": 1
   },
   "AidKit": {
     "sym": "+",
-    "hpUp" : 5
+    "hp": 5
   }
 }

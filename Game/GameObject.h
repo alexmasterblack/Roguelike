@@ -15,7 +15,7 @@ class Projectile;
 class GameObject
 {
 public:
-	GameObject(Point, char);
+	GameObject(Point, char, int);
 
 	Point GetPos();
 
@@ -25,26 +25,31 @@ public:
 	
 	void SetSym(char);
 
+	int GetHp();
+
+	void SetHp(int);
+
 	virtual Point Move(std::map<Point, std::shared_ptr<GameObject>>&) = 0;
 
-	virtual void Collide(GameObject*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(GameObject*) = 0;
 
-	virtual void Collide(Wall*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(Wall*) = 0;
 
-	virtual void Collide(Knight*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(Knight*) = 0;
 
-	virtual void Collide(Zombie*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(Zombie*) = 0;
 
-	virtual void Collide(Dragon*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(Dragon*) = 0;
 
-	virtual void Collide(Princess*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(Princess*) = 0;
 
-	virtual void Collide(AidKit*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(AidKit*) = 0;
 
-	virtual void Collide(Projectile*, std::map<Point, std::shared_ptr<GameObject>>&) = 0;
+	virtual void Collide(Projectile*) = 0;
 
 private:
 	Point position;
 	char sym;
+	int hp;
 };
 
