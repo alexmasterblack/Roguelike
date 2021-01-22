@@ -14,6 +14,8 @@ class Zombie : public Character
 public:
 	Zombie(Point, char, int, int, int);
 
+	~Zombie() = default;
+
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
 	void Collide(GameObject*) override;

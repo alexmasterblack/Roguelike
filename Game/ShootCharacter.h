@@ -8,6 +8,8 @@ public:
 
 	ShootCharacter(Point, char, int, int, int, int);
 
+	~ShootCharacter() = default;
+
 	int GetDirection();
 
 	void SetDirection(int);

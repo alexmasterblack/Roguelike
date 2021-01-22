@@ -13,6 +13,8 @@ class Wall : public GameObject
 public:
 	Wall(Point, char, int);
 
+	~Wall() = default;
+
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
 	void Collide(GameObject*) override;

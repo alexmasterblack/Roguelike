@@ -13,6 +13,8 @@ class Princess : public GameObject
 public:
 	Princess(Point, char, int);
 
+	~Princess() = default;
+
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
 	void Collide(GameObject*) override;

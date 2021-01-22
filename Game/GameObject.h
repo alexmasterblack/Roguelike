@@ -17,6 +17,8 @@ class GameObject
 public:
 	GameObject(Point, char, int);
 
+	~GameObject() = default;
+
 	Point GetPos();
 
 	char GetSym();

@@ -29,19 +29,19 @@ Point Projectile::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects
     int x = 0, y = 0;
     switch (GetDirection()) {
     case 0: {
-        y--;
-        break;
-    }
-    case 1: {
-        y++;
-        break;
-    }
-    case 2: {
         x--;
         break;
     }
-    case 3: {
+    case 1: {
         x++;
+        break;
+    }
+    case 2: {
+        y--;
+        break;
+    }
+    case 3: {
+        y++;
         break;
     }
     default:

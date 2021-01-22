@@ -6,7 +6,7 @@
 class GameProcess
 {
 public:
-	GameProcess();
+	GameProcess() = default;
 	void StartGame();
 	void Game();
 	void ResultGame(bool);

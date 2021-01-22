@@ -13,6 +13,8 @@ class AidKit : public GameObject
 public:
 	AidKit(Point, char, int);
 
+	~AidKit() = default;
+
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
 	void Collide(GameObject*) override;

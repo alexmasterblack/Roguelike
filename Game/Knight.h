@@ -13,6 +13,8 @@ class Knight : public ShootCharacter
 public:
 	Knight(Point, char, int, int, int);
 
+	~Knight() = default;
+
 	bool GetEndGame();
 
 	void SetEndGame(bool);

@@ -14,7 +14,7 @@ void Map::ReadMap()
 		for (int col = 0; col < 48; col++) {
 			char symbol;
 			file >> symbol;
-			Point position(col, row);
+			Point position(row, col);
 			switch (symbol) {
 			case 'K': {
 				std::string sym = setting["Knight"]["sym"];
@@ -73,23 +73,31 @@ void Map::ReadMap()
 void Map::LoadMap()
 {
 	clear();
-	for (int row = 0; row < 18; row++) {
-		for (int col = 0; col < 48; col++) {
-			auto pixel = gameObjects.find(Point(col, row));
-			if (pixel != gameObjects.end()) {
-				mvaddch(row, col, pixel->second->GetSym());
-			}
-		}
-	}
 	// dynamic_pointer_cast to go down/across class hierarchy
-	int knightHp = 0;
-	for (auto &object : gameObjects) {
-		auto knight = std::dynamic_pointer_cast<Knight>(object.second);
-		if (knight) {
-			knightHp = knight->GetHp();
+	std::shared_ptr<Knight> knignt;
+	for (const auto& object : gameObjects) {
+		if (std::dynamic_pointer_cast<Knight>(object.second)) {
+			knignt = std::dynamic_pointer_cast<Knight>(object.second);
 			break;
 		}
 	}
-	mvprintw(1, 50, ("Health: " + std::to_string(knightHp)).c_str());
+
+	for (int row = 0; row < 18; row++) {
+		for (int col = 0; col < 48; col++) {
+			Point position = knignt->GetPos();
+			if (pow((row - position.x), 2) + pow((col - position.y), 2) < 36) {
+				Point place(row, col);
+				auto object = gameObjects.find(place);
+				if (object != gameObjects.end()) {
+					mvaddch(row, col, object->second->GetSym());
+				}
+			}
+			else {
+				mvaddch(row, col, ' ');
+			}
+		}
+	}
+
+	mvprintw(1, 50, ("Health: " + std::to_string(knignt->GetHp())).c_str());
 	refresh();
 }

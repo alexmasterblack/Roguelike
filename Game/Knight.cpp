@@ -16,27 +16,27 @@ void Knight::SetEndGame(bool endGame)
 Point Knight::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 {
     int x = 0, y = 0;
-    int command = getch();
-    switch (command)
+    int choice = getch();
+    switch (choice)
     {
     case KEY_UP: {
         SetDirection(0);
-        y--;
+        x--;
         break;
     }
     case KEY_DOWN: {
         SetDirection(1);
-        y++;
+        x++;
         break;
     }
     case KEY_LEFT: {
         SetDirection(2);
-        x--;
+        y--;
         break;
     }
     case KEY_RIGHT: {
         SetDirection(3);
-        x++;
+        y++;
         break;
     }
     case 10: {
@@ -69,19 +69,19 @@ void Knight::Shoot(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
     switch (GetDirection())
     {
     case 0: {
-        y--;
-        break;
-    }
-    case 1: {
-        y++;
-        break;
-    }
-    case 2: {
         x--;
         break;
     }
-    case 3: {
+    case 1: {
         x++;
+        break;
+    }
+    case 2: {
+        y--;
+        break;
+    }
+    case 3: {
+        y++;
         break;
     }
     default:
@@ -89,8 +89,8 @@ void Knight::Shoot(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
     }
 
     Point positionNew(GetPos().x + x, GetPos().y + y);
-    auto it = gameObjects.find(positionNew);
-    if (it == gameObjects.end()) {
+    auto object = gameObjects.find(positionNew);
+    if (object == gameObjects.end()) {
         gameObjects[positionNew] = std::make_shared<Projectile>(positionNew, '*', 1, GetDamage(), 1, GetDirection());
     }
 }

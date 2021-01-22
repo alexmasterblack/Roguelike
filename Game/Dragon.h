@@ -13,6 +13,8 @@ class Dragon : public ShootCharacter
 public:
 	Dragon(Point, char, int, int, int);
 
+	~Dragon() = default;
+
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
 	void Shoot(std::map<Point, std::shared_ptr<GameObject>>&) override;

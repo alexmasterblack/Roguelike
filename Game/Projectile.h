@@ -11,8 +11,9 @@
 class Projectile : public ShootCharacter
 {
 public:
-
 	Projectile(Point, char, int, int, int, int);
+
+	~Projectile() = default;
 
 	Point Move(std::map<Point, std::shared_ptr<GameObject>>&) override;
 
