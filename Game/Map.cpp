@@ -91,6 +91,9 @@ void Map::LoadMap()
 				if (object != gameObjects.end()) {
 					mvaddch(row, col, object->second->GetSym());
 				}
+				else {
+					mvaddch(row, col, '.');
+				}
 			}
 			else {
 				mvaddch(row, col, ' ');

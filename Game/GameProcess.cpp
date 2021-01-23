@@ -89,7 +89,7 @@ void GameProcess::Game()
         for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
             Point position = object->second->Move(gameMap.gameObjects);
             auto oldObject = object;
-            if (position != oldObject->first) {
+            if (position != object->first) {
                 object++;
                 gameMap.gameObjects.erase(oldObject->first);
             }

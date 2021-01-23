@@ -108,9 +108,9 @@ void Knight::Collide(Zombie* object) {
     object->Collide(this);
 }
 
-void Knight::Collide(Dragon* object) {}
+void Knight::Collide(Dragon*) {}
 
-void Knight::Collide(Princess* gameObjects)
+void Knight::Collide(Princess* object)
 {
     SetEndGame(true);
 }

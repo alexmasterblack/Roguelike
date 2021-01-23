@@ -87,10 +87,7 @@ void Dragon::Collide(GameObject* object)
 
 void Dragon::Collide(Wall*) {}
 
-void Dragon::Collide(Knight* object)
-{
-    //object->SetHp(std::max(0, object->GetHp() - GetDamage()));
-}
+void Dragon::Collide(Knight*) {}
 
 void Dragon::Collide(Zombie*) {}
 
