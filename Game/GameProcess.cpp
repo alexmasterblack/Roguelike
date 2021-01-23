@@ -64,17 +64,7 @@ void GameProcess::Game()
     gameMap.ReadMap();
     while (true) {
         for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
-            if (object->second->GetHp() == 0) {
-                object = gameMap.gameObjects.erase(object);
-            }
-            else {
-                object++;
-            }
-        }
-        for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
-            Point position = object->second->Move(gameMap.gameObjects);
-            auto oldObject = object;
-            auto knight = std::dynamic_pointer_cast<Knight>(oldObject->second);
+            auto knight = std::dynamic_pointer_cast<Knight>(object->second);
             if (knight) {
                 if (knight->GetHp() == 0) {
                     ResultGame(false);
@@ -89,6 +79,16 @@ void GameProcess::Game()
                     return;
                 }
             }
+            if (object->second->GetHp() == 0) {
+                object = gameMap.gameObjects.erase(object);
+            }
+            else {
+                object++;
+            }
+        }
+        for (auto object = gameMap.gameObjects.begin(); object != gameMap.gameObjects.end(); ) {
+            Point position = object->second->Move(gameMap.gameObjects);
+            auto oldObject = object;
             if (position != oldObject->first) {
                 object++;
                 gameMap.gameObjects.erase(oldObject->first);

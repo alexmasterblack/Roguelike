@@ -104,7 +104,9 @@ void Knight::Collide(Wall*) {}
 
 void Knight::Collide(Knight*) {}
 
-void Knight::Collide(Zombie* object) {}
+void Knight::Collide(Zombie* object) {
+    object->Collide(this);
+}
 
 void Knight::Collide(Dragon* object) {}
 

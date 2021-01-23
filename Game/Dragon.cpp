@@ -37,7 +37,6 @@ Point Dragon::Move(std::map<Point, std::shared_ptr<GameObject>>& gameObjects)
 
     Point position = GetPos();
     Point positionNew(position.x + x, position.y + y);
-
     auto object = gameObjects.find(positionNew);
     if (object == gameObjects.end()) {
         gameObjects[positionNew] = gameObjects[position];
@@ -90,7 +89,7 @@ void Dragon::Collide(Wall*) {}
 
 void Dragon::Collide(Knight* object)
 {
-    object->SetHp(std::max(0, object->GetHp() - GetDamage()));
+    //object->SetHp(std::max(0, object->GetHp() - GetDamage()));
 }
 
 void Dragon::Collide(Zombie*) {}
